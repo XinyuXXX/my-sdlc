@@ -1,0 +1,10 @@
+{
+  "name": "my-sdlc",
+  "description": "Autonomous software development lifecycle workflow: playbook routing (feature, bug-fix, multi-phase plan, autonomous run), architecture and adversarial review (architect, arena, interrogate, swarm), TDD iron law, live verification harnesses (create-verification-skill), on-disk execution ledger, evidence-backed decision trails, and a library of engineering principles. Distilled from pstack with the superpowers session bootstrap, TDD iron law, and resumable ledger merged in.",
+  "version": "0.1.0",
+  "author": {
+    "name": "xuxinyu"
+  },
+  "license": "MIT",
+  "keywords": ["skills", "sdlc", "tdd", "verification", "code-review", "autonomous", "engineering-principles"]
+}
