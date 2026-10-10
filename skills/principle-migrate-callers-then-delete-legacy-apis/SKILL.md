@@ -16,6 +16,8 @@ When we decide a new API is the right design, migrate callers and remove the old
 - Treat temporary adapters as exceptional and time-boxed, not default architecture
 - Update tests to assert the new contract, and delete tests that only protect pre-refactor implementation details
 
+**When the blast radius fans too wide for one wave** (a rename or retype that breaks thousands of call sites at once), sequence it expand-contract instead. Expand: add the new form beside the old so nothing breaks. Migrate: move call sites in batches sized by blast radius (per package, per directory), each batch its own verifiable step, CI green batch to batch because the old form still exists. Contract: delete the old form once no caller remains. When even the batches cannot stay green alone, keep the sequence but let them share an integration branch, with green promised only at the final integrate-and-verify step.
+
 **When this applies:**
 - No external users depend on backward compatibility
 - The project can absorb coordinated breaking changes

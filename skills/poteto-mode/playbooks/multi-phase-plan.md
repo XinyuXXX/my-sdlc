@@ -3,9 +3,9 @@
 **You own the plan, not the code. The plan is a checklist an owner runs box by box and the operator audits from the evidence.** The plan is the deliverable. Do not implement.
 
 1. When the change is one or two files with an obvious approach, skip the plan. Say so and stop.
-2. Settle open questions by prototype before you write. Run `playbooks/prototype.md` for each. Keep the branch, the SHA, and the screenshots for Appendix A. Ask the operator only about a product or preference call that no run can settle. Give options (the **never-block-on-the-human** principle skill).
+2. Settle open questions by prototype before you write. Run `playbooks/prototype.md` for each. Keep the branch, the SHA, and the screenshots for Appendix A. Ask the operator only about a product or preference call that no run can settle. Give options (the **never-block-on-the-human** principle skill). For a high-stakes or hard-to-reverse program, offer the operator a **grill-me** thermonuclear-mode pass over the formed plan before writing starts; their call, not a default gate.
 3. Explore in delegated workers instructed to read and apply poteto-mode first, with an explicit model per the Subagents section (the **guard-the-context-window** principle skill). Each returns file pointers, conventions, test commands, and entry points. No inlined dumps.
-4. Copy the skeleton below into the plan file and fill every placeholder. Unless the operator names a path, write the file to an uncommitted `docs/` directory in the workspace. Keep every heading and every sub-block in the order shown. One section per PR. One PR is one change with its own evidence (the **sequence-verifiable-units** principle skill). Name the execution playbook in **How to read this**. Use `playbooks/feature.md` for a single-PR change and `playbooks/autonomous-run.md` for a long unattended drive.
+4. Copy the skeleton below into the plan file and fill every placeholder. Unless the operator names a path, write the file to an uncommitted `docs/` directory in the workspace. Keep every heading and every sub-block in the order shown. One section per PR. One PR is one change with its own evidence (the **sequence-verifiable-units** principle skill). Slice PRs as tracer bullets: each one cuts a narrow but complete path through every layer it touches, is demoable or verifiable on its own, and is sized to fit one fresh executor context. When the change is one mechanical edit whose blast radius fans across the codebase, sequence it expand-contract per **principle-migrate-callers-then-delete-legacy-apis** instead of forcing a vertical slice. When slices cannot each land green on trunk, run them against one integration branch and promise green only at the final integrate-and-verify PR. Name the execution playbook in **How to read this**. Use `playbooks/feature.md` for a single-PR change and `playbooks/autonomous-run.md` for a long unattended drive.
 5. Write under `technical-writing` in full, then `unslop`. The body is one Diátaxis mode, how-to. Appendices hold explanation and reference. Each heading states the task or the finding. No long dashes. No mid-sentence colons.
 6. Run `node <pstack-skills-directory>/poteto-mode/scripts/check-plan.mjs <plan.md>` and fix every line it prints (the **encode-lessons-in-structure** principle skill).
 7. Hand back. Post the plan path and the script's output, then stop. Execution starts on the operator's explicit go, under the execution playbook the plan names.
@@ -17,7 +17,7 @@
 ````markdown
 # <Program> plan
 
-<Under ten lines. What changes, for whom, the rule the program enforces, and the PR ids in order.>
+<Under ten lines. What changes, for whom, the rule the program enforces, what it deliberately leaves out, and the PR ids in order.>
 
 ## How to read this
 
@@ -149,7 +149,7 @@ Each live lane runs on its own remote VM at the PR head. Drive through the proje
 
 ## Appendix D. Links and reading list
 
-<Docs to read before editing. Which PRs get `<pstack-skills-directory>/how/SKILL.md` and `<pstack-skills-directory>/interrogate/SKILL.md`. The trail per `<pstack-skills-directory>/show-me-your-work/SKILL.md`.>
+<Docs to read before editing. Which PRs get `<pstack-skills-directory>/how/SKILL.md` and `<pstack-skills-directory>/interrogate/SKILL.md`. The trail per `<pstack-skills-directory>/execution-ledger/SKILL.md`.>
 ````
 
 **Reply:** the plan path, the PR ids with their dependencies and the review-gated set, what the prototypes proved and what stays unproven, and the check script's output.

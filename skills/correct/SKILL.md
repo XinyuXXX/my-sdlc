@@ -16,6 +16,8 @@ Assume every contributor is an agent that sees only the files it opened, copies 
 
 First, read recent commits, reverts, review comments, agent instruction files, and comments that explain workarounds. Group the mistakes into classes. A class counts once it has happened twice.
 
+Sweep these categories for candidates: navigation (was the right file hard to find, would a pointer in the instruction file have helped), automated checks (a lint, type, test, or CI gap that would have caught it, or a check that exists but sits unwired), steering-file hygiene (instructions that no longer change behavior, an instruction file grown past navigation duty), tool economy (expensive calls a cheaper path replaces), and information access (a log, endpoint, or read-only credential the agent lacked).
+
 ## Fix each class at the highest level that works
 
 1. **Eliminate it with architecture.** Give each piece of state one owner and each task one supported way. Hide internals so the wrong import fails. Replace hand-synced lists with one source of truth. Delete old ways and dead code an agent would copy.
