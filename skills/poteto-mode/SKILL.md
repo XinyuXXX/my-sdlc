@@ -2,7 +2,7 @@
 name: "poteto-mode"
 description: "Default working style for software development: task routing to playbooks, delegation, autonomy boundaries, and verification discipline. Activate with /skill:poteto-mode or on explicit request."
 license: MIT
-compatibility: "Some playbooks optionally use git, GitHub CLI, conversation history, delegation, or a branch-stacking or recurring-execution capability; without recurring execution, poll in the active session. Bundled helpers require Bun, first-run network access, and write access to their installed scripts directory for dependencies."
+compatibility: "Some playbooks optionally use git, GitHub CLI, conversation history, delegation, or a branch-stacking or recurring-execution capability; without recurring execution, poll in the active session. Bundled helpers are check-plan.mjs (Node) and worktree-audit.sh (bash)."
 metadata:
   pstack-distilled-origin: "cursor/plugins/pstack/skills/poteto-mode"
   pstack-distilled-activation: "explicit"

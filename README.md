@@ -6,7 +6,7 @@
 
 | 来源 | 机制 | 位置 |
 |---|---|---|
-| pstack | playbook 路由 + 22 条工程原则 + live 验证 harness + 对抗评审 | `skills/`（46 个 skill） |
+| pstack | playbook 路由 + 22 条工程原则 + live 验证 harness + 对抗评审 | `skills/`（44 个 pstack 源 skill，全库共 47 个） |
 | superpowers | SessionStart hook 自动激活（不依赖模型记得用） | `hooks/` |
 | superpowers | TDD 铁律（无失败测试不写生产代码） | `skills/tdd/SKILL.md` |
 | superpowers | 磁盘执行 ledger（抗上下文压缩，可断点续跑），已与 pstack 的 decisions.tsv 审计轨迹合并为双工件单技能 | `skills/execution-ledger/SKILL.md` |
