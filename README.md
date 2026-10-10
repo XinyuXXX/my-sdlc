@@ -2,14 +2,16 @@
 
 自主软件开发生命周期（SDLC）agent 工作流：从需求到自动开发、验证、提交 git，高质量交付，只在重要环节请人确认。
 
-本插件以 [pstack-distilled](../pstack-distilled)（Lauren Tan 的 pstack 移植版）为骨架，合并了 [superpowers](../superpowers) 的三项机制：
+本插件以 pstack-distilled（Lauren Tan 的 pstack 移植版，上游 `github.com/lionkeng/pstack-distilled`）为骨架，合并了 superpowers（Jesse Vincent，`github.com/obra/superpowers`）的三项机制。两个上游的本地副本均已删除，需要时重新克隆即可；盘点与取舍记录见 [docs/ADAPT-NOTES.md](docs/ADAPT-NOTES.md)：
 
 | 来源 | 机制 | 位置 |
 |---|---|---|
 | pstack | playbook 路由 + 22 条工程原则 + live 验证 harness + 对抗评审 | `skills/`（46 个 skill） |
 | superpowers | SessionStart hook 自动激活（不依赖模型记得用） | `hooks/` |
 | superpowers | TDD 铁律（无失败测试不写生产代码） | `skills/tdd/SKILL.md` |
-| superpowers | 磁盘执行 ledger（抗上下文压缩，可断点续跑） | `skills/execution-ledger/SKILL.md` |
+| superpowers | 磁盘执行 ledger（抗上下文压缩，可断点续跑），已与 pstack 的 decisions.tsv 审计轨迹合并为双工件单技能 | `skills/execution-ledger/SKILL.md` |
+| mattpocock/skills | grill-me 双模式访谈（intake 需求访谈 + thermonuclear 计划压测）+ ADR/GLOSSARY 落盘；另嫁接：Spec 评审轴入 clean-code-guard、expand-contract 入 migrate 原则、tracer-bullet 切片入 multi-phase-plan、retro 类别入 correct | `skills/grill-me/SKILL.md` |
+| clean-code-guard（用户级移植） | 实现后守卫：diff 范围内过 Clean Code/SOLID/YAGNI + LLM 失败模式清单 | `skills/clean-code-guard/` |
 
 相对 pstack 原版删掉了 GitHub PR 重耦合件：`babysit`、`orchestrate`、`autopilot-full`、`autopilot-stack` playbook 及 `watch-pr`/`orch` 脚本（Bun + gh CLI 依赖）。自主长任务走 `autonomous-run` playbook；落栈走 `shipping`（已改为纯 `gh` 轮询）。
 
@@ -44,7 +46,7 @@
 - **patch-id 规则**：裁决绑定 `git patch-id`，rebase 噪音不失效、实质变化推翻重验
 - **计划机器校验**：`node skills/poteto-mode/scripts/check-plan.mjs <plan.md>`
 - **执行 ledger**：`.my-sdlc/runs/<slug>/progress.md` 记录完成任务+测试证据+裁决+parked 发现，压缩/重启后从 ledger + git log 恢复
-- **审计轨迹**：`show-me-your-work` 的只增 decisions.tsv + 交接前跨模型独立评审
+- **审计轨迹**：`execution-ledger` 的只增 decisions.tsv + 交接前跨模型独立评审
 
 ## 安装
 
@@ -65,10 +67,11 @@ hooks/                       SessionStart 注入（run-hook.cmd + session-start�
 skills/
   poteto-mode/               中央路由 + 19 个 playbook + check-plan.mjs
   tdd/                       TDD 铁律（pstack 务实豁免 + superpowers iron law）
-  execution-ledger/          磁盘执行 ledger（断点续跑）
+  execution-ledger/          progress.md 断点续跑 + decisions.tsv 审计轨迹（双工件）
   architect/ arena/ swarm/ interrogate/   设计与对抗评审
   create-verification-skill/ maintain-verification-skill/   live 验证 harness
-  show-me-your-work/         decisions.tsv 审计轨迹
+  grill-me/                  双模式访谈：intake 需求访谈 + thermonuclear 计划压测
+  clean-code-guard/          实现后双轴守卫（verify 后、Opening a PR 前，限 diff 范围）
   how/ why/ figure-it-out/   代码库问答与自定义工作流
   principle-*/               22 条工程原则
   unslop/ technical-writing/ no-comments/ correct/ …
@@ -78,3 +81,4 @@ skills/
 
 - pstack-distilled: https://github.com/lionkeng/pstack-distilled (MIT)，源自 Lauren Tan 的 pstack
 - superpowers: https://github.com/obra/superpowers (MIT)，Jesse Vincent
+- mattpocock/skills: https://github.com/mattpocock/skills (MIT)，grill-me 的来源
