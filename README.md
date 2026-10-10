@@ -50,13 +50,21 @@
 
 ## 安装
 
+一条命令（install.sh 封装全部路径，四宿主 × 两级别）：
+
+```bash
+./install.sh <kimi|claude|copilot|opencode|all> <user|project> [项目路径] [--with-hook]
+```
+
+各宿主的技能路径、hook 支持、激活方式和能力差异，见 [docs/USER-GUIDE.md](docs/USER-GUIDE.md)。要点：Claude Code 走 `--with-hook` 有完整的 SessionStart 自动注入；Kimi 用 `/skill:poteto-mode` 手动激活；Copilot 的 hook 可用（独立 JSON 文件方式）；OpenCode 手动点名激活。
+
 ### Kimi Code CLI
 
-插件清单在 `.kimi-plugin/plugin.json`，声明了 `skills`、`sessionStart: poteto-mode`（会话开始自动注入路由 skill）和 `skillInstructions`（Kimi 工具映射：Task→Agent、TodoWrite→TodoList、提问→AskUserQuestion）。
+项目级：`<项目>/.kimi/skills/` 符号链接（install.sh 完成）。激活：`/skill:poteto-mode`。
 
 ### Claude Code
 
-`.claude-plugin/plugin.json` + `hooks/hooks.json` 注册 SessionStart hook（startup/clear/compact 时执行 `hooks/session-start`，把 poteto-mode 全文注入上下文）。
+`install.sh claude user --with-hook` 会把 SessionStart hook 写进 `~/.claude/settings.json`（自动备份原文件）。
 
 ## 目录结构
 
@@ -64,6 +72,8 @@
 .claude-plugin/plugin.json   Claude 清单
 .kimi-plugin/plugin.json     Kimi 清单（含工具映射）
 hooks/                       SessionStart 注入（run-hook.cmd + session-start）
+install.sh                   四宿主 × 两级别的一键安装（符号链接 + 可选 hook）
+docs/USER-GUIDE.md           用户使用指南（安装、激活、各宿主差异）
 skills/
   poteto-mode/               中央路由 + 19 个 playbook + check-plan.mjs
   tdd/                       TDD 铁律（pstack 务实豁免 + superpowers iron law）
